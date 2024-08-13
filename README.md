@@ -1,6 +1,6 @@
 # AdaptVision
 
-AdaptVsion: Dynamic Input Scaling in MLLMs for Versatile Scene Understanding
+AdaptVision: Dynamic Input Scaling in MLLMs for Versatile Scene Understanding
 
 <a href="https://github.com/harrytea/AdaptVision"><img src="images/arch.png" width="100%"></a>
 
