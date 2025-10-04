@@ -23,7 +23,6 @@ class CLIPVisionTower(nn.Module):
         self.image_processor = CLIPImageProcessor.from_pretrained(self.vision_tower_name)
         self.vision_tower = CLIPVisionModel.from_pretrained(self.vision_tower_name)
         self.vision_tower.requires_grad_(False)
-
         self.is_loaded = True
 
     def feature_select(self, image_forward_outs):
@@ -74,5 +73,13 @@ class CLIPVisionTower(nn.Module):
         return self.config.hidden_size
 
     @property
+    def image_size(self):
+        return self.config.image_size
+
+    @property
     def num_patches(self):
         return (self.config.image_size // self.config.patch_size) ** 2
+
+    @property
+    def num_patches_per_side(self):
+        return (self.config.image_size // self.config.patch_size)

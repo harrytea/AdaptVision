@@ -4,7 +4,7 @@ import torch
 from llava import LlavaLlamaForCausalLM
 from llava.conversation import conv_templates
 from llava.mm_utils import tokenizer_image_token
-from llava.mm_utils import expand2square, sliding_window
+from llava.mm_utils import process_grid_image, process_anyres_image, sliding_window
 from transformers import AutoTokenizer, AutoConfig
 
 from PIL import Image
@@ -14,8 +14,11 @@ DEFAULT_IM_END_TOKEN = "</img>"
 IMAGE_TOKEN_INDEX = -200
         
 
-class LLaVA:
-    def __init__(self, model_path, device, dtype):
+class AdaptVisionHandler:
+    def __init__(self):
+        pass
+
+    def initialize_llm(self, model_path, device="cuda", dtype=torch.float16):
         config = AutoConfig.from_pretrained(model_path)
         tokenizer = AutoTokenizer.from_pretrained(model_path)
         model = LlavaLlamaForCausalLM.from_pretrained(model_path, torch_dtype=dtype, config=config).to(device)
@@ -53,21 +56,25 @@ class LLaVA:
         conv.append_message(conv.roles[0], qs)
         conv.append_message(conv.roles[1], None)  # add
         prompt = conv.get_prompt()
-        print(prompt)
+        # print(prompt)
         input_ids = tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX).unsqueeze(0).to(self.device)
 
 
         image = Image.open(image).convert('RGB')
         crop_height = self.image_processor.crop_size['height']
-        image = expand2square(image, crop_height)
-        windows_img, windows_index = sliding_window(image, stride=crop_height)
-    
+        # image = process_grid_image(image, crop_height)
+        if self.model.config.image_aspect_ratio == "grid":
+            images = process_grid_image(pil_img=image, shard_size=crop_height, max_grid_num=self.model.config.max_grid_num)
+        elif self.model.config.image_aspect_ratio == "anyres":
+            images = process_anyres_image(pil_img=image, shard_size=crop_height, grid_pinpoints=self.model.config.image_grid_pinpoints)
+        
+        windows_img, windows_index = sliding_window(images, stride=crop_height)
         image_concat = []
         for img in windows_img:
             img = self.image_processor.preprocess(img, return_tensors='pt')['pixel_values'][0]
             image_concat.append(img)
-        image = torch.stack(image_concat, dim=0)
-        image = torch.as_tensor(image, dtype=self.dtype)
+        images = torch.stack(image_concat, dim=0)
+        images = torch.as_tensor(images, dtype=self.dtype)
 
         # position index
         for idx, win_index in enumerate(windows_index):
@@ -75,17 +82,20 @@ class LLaVA:
             tensor_index = self.tokenizer.encode(joined_str)[1]
             windows_index[idx] = torch.tensor(tensor_index, dtype=torch.long).to(self.device)
 
-        image_tensor = ([image.to(self.device)], [windows_index])
+        image_tensor = [[images.to(self.device)], [windows_index]]
+        image_sizes = [image.size]
         with torch.inference_mode():
             output_ids = self.model.generate(
                 input_ids=input_ids,
                 images=image_tensor,
+                image_sizes=image_sizes,
                 do_sample=False,  # 加入随机性
                 temperature=0.2,  # 0.2 // 0.9
                 max_new_tokens=max_new_toekns
             )
             input_token_len = input_ids.shape[1]
             outputs = self.tokenizer.batch_decode(output_ids[:, input_token_len:], skip_special_tokens=True)[0]
+        outputs = outputs.strip()
 
         return outputs
 

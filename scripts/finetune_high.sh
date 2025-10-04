@@ -1,0 +1,34 @@
+#!/bin/bash
+
+/opt/conda/envs/llava/bin/deepspeed llava/train/train_mem.py \
+    --deepspeed ./scripts/zero2.json \
+    --model_name_or_path /data/oss_bucket_0/wangyh.ahui/models/llavanext/llava_7b_grid3_high_siglip2_512_pretrain \
+    --data_path /data/oss_bucket_0/wangyh.ahui/datasets/AdaptVision_All_Data/instruct \
+    --image_folder /data/oss_bucket_0/wangyh.ahui/datasets/AdaptVision_All_Data/images \
+    --data_stage finetune \
+    --vision_tower /data/oss_bucket_0/wangyh.ahui/models/google/siglip2-so400m-patch16-512 \
+    --mm_vision_select_layer -2 \
+    --mm_use_im_start_end True \
+    --bf16 True \
+    --output_dir /data/oss_bucket_0/wangyh.ahui/models/llavanext/llava_7b_grid3_high_siglip2_512_finetune \
+    --use_pos_token True \
+    --image_aspect_ratio grid \
+    --image_grid_pinpoints "(1x1),...,(3x3)" \
+    --max_grid_num 3 \
+    --num_train_epochs 1 \
+    --per_device_train_batch_size 1 \
+    --per_device_eval_batch_size 4 \
+    --gradient_accumulation_steps 4 \
+    --save_strategy "steps" \
+    --save_steps 3000 \
+    --save_total_limit 1 \
+    --learning_rate 2e-5 \
+    --weight_decay 0.0 \
+    --warmup_ratio 0.03 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 1 \
+    --tf32 True \
+    --model_max_length 8192 \
+    --gradient_checkpointing True \
+    --dataloader_num_workers 8 \
+    --report_to none  2>&1 | tee error.txt

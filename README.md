@@ -87,9 +87,9 @@ You can download the other training data from [LLaVA](https://github.com/haotian
 
 ## Training
 
-stage1: `bash scripts/pretrain.sh`
+stage1: `bash scripts/pretrain_high.sh`
 
-stage2: `bash scripts/finetune.sh`
+stage2: `bash scripts/finetune_high.sh`
 
 
 ## Acknowledgement

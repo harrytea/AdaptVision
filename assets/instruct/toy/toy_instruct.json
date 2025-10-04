@@ -1,0 +1,1244 @@
+[
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    },
+    {
+        "id": "0000000000",
+        "image": "0000000000.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nCan you tell me the main subject of the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "The main subject of the image is the cover of a magazine. The cover features a bearded man, and it\\'s the March issue of a magazine titled \"War is Hell\"."
+            },
+            {
+                "from": "human",
+                "value": "What text is prominently displayed on the cover?"
+            },
+            {
+                "from": "gpt",
+                "value": "The text \"War Is Hell\"[0.03, 0.841, 0.99, 0.988] is prominently displayed on the cover of the magazine."
+            },
+            {
+                "from": "human",
+                "value": "I see there are two adjacent texts, \"WAR IS HELL\" and \"CROSS\". Could you combine them and provide their final new coordinates?"
+            },
+            {
+                "from": "gpt",
+                "value": "Yes, the conbined text and their coordinates is \"WAR IS HELL CROSS\"[0.037, 0.218, 0.271, 0.306]."
+            }
+        ]
+    },
+    {
+        "id": "0000000001",
+        "image": "0000000001.jpg",
+        "image_folder": "toy_image",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhat is prominently featured in the image in terms of text content?"
+            },
+            {
+                "from": "gpt",
+                "value": "The image features text that states \"THE EDSCHULTZ SHOW PODCAST\"[0.0, 0.0, 0.919, 0.276]."
+            },
+            {
+                "from": "human",
+                "value": "Can you provide some specifics about the individual captured in the image? "
+            },
+            {
+                "from": "gpt",
+                "value": "Absolutely, the image features a man who is engaging in a podcast. He is smiling and has a headset on with a microphone near his ear."
+            }
+        ]
+    }
+]

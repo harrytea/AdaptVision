@@ -1,15 +1,19 @@
 from abc import ABC, abstractmethod
-
+import itertools
+import math
 import torch
 import torch.nn as nn
-
+import torch.nn.functional as F
 from .multimodal_encoder.builder import build_vision_tower
 
 from llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
 from llava.constants import DEFAULT_IM_GLOBAL_TOKEN
-from llava.constants import DEFAULT_IM_1_1_TOKEN, DEFAULT_IM_1_2_TOKEN, DEFAULT_IM_1_3_TOKEN
-from llava.constants import DEFAULT_IM_2_1_TOKEN, DEFAULT_IM_2_2_TOKEN, DEFAULT_IM_2_3_TOKEN
-from llava.constants import DEFAULT_IM_3_1_TOKEN, DEFAULT_IM_3_2_TOKEN, DEFAULT_IM_3_3_TOKEN
+from llava.constants import DEFAULT_IM_1_1_TOKEN, DEFAULT_IM_1_2_TOKEN, DEFAULT_IM_1_3_TOKEN, DEFAULT_IM_1_4_TOKEN
+from llava.constants import DEFAULT_IM_2_1_TOKEN, DEFAULT_IM_2_2_TOKEN, DEFAULT_IM_2_3_TOKEN, DEFAULT_IM_2_4_TOKEN
+from llava.constants import DEFAULT_IM_3_1_TOKEN, DEFAULT_IM_3_2_TOKEN, DEFAULT_IM_3_3_TOKEN, DEFAULT_IM_3_4_TOKEN
+from llava.constants import DEFAULT_IM_4_1_TOKEN, DEFAULT_IM_4_2_TOKEN, DEFAULT_IM_4_3_TOKEN, DEFAULT_IM_4_4_TOKEN
+from llava.mm_utils import get_anyres_image_grid_shape, unpad_image
+
 
 class LlavaMetaModel:
     def __init__(self, config):
@@ -29,7 +33,6 @@ class LlavaMetaModel:
         self.mm_projector = nn.Linear(self.config.mm_hidden_size, self.config.hidden_size)
         self.down_vision = nn.Linear(self.config.hidden_size*4, self.config.hidden_size)
 
-
     def update_config(self, model_args):
         self.config.mm_hidden_size = self.get_vision_global().hidden_size
         self.config.mm_vision_tower = model_args.vision_tower
@@ -37,50 +40,93 @@ class LlavaMetaModel:
         self.config.mm_vision_select_feature = model_args.mm_vision_select_feature
         # pretrain
         self.config.pretrain_vision_tower = model_args.pretrain_vision_tower
-
+        self.config.image_aspect_ratio = model_args.image_aspect_ratio
+        self.config.image_grid_pinpoints = model_args.image_grid_pinpoints
+        self.config.max_grid_num = model_args.max_grid_num
+        self.config.use_pos_token = model_args.use_pos_token
 
 class LlavaMetaForCausalLM(ABC):
     @abstractmethod
     def get_model(self):
         pass
 
-    def encode_images(self, images):
-        # 经过projector以后降维
-        # if images.size()[0] == 1:
-        #     image_features = self.get_model().get_vision_global()(images)
-        # else:
-            # image_global = self.get_model().get_vision_global()(images[0].unsqueeze(0))
-            # image_local = self.get_model().get_vision_local()(images[1:])
-            # image_features = torch.cat((image_global, image_local), dim=0)
-        image_global = self.get_model().get_vision_global()(images[0].unsqueeze(0))
-        image_local = self.get_model().get_vision_local()(images[1:])
-        image_features = torch.cat((image_global, image_local), dim=0)
-        image_features = self.get_model().mm_projector(image_features)
-        global_feature = image_features[0]
-        # if image_features.size()[0] == 1:
-        #     return [global_feature]
-        local_feature = image_features[1:]
-        bs, pn, hs = local_feature.shape
-        local_feature = local_feature.view(bs, int(pn/4), int(hs*4))
-        # local_feature = local_feature.permute(0, 2, 1)
-        local_feature = self.get_model().down_vision(local_feature)
-        # local_feature = local_feature.permute(0, 2, 1)
-        return [global_feature, local_feature]
+    #--------------------------------------------------
+    def encode_images_batch(self, images):
+        batch_size = len(images)
+        index_list = [len(img)-1 for img in images]  # 减去全局图像
 
-    def prepare_inputs_labels_for_multimodal(self, input_ids, attention_mask, past_key_values, labels, images):
+        # 图像编码
+        global_images = torch.stack([img[0] for img in images]) # [8, 3, 336, 336]
+        local_images = torch.cat([img[1:] for img in images])  # [63, 3, 336, 336]
+        image_global = self.get_model().get_vision_global()(global_images)  # [8, n_tokens, hidden_size]
+        image_local = self.get_model().get_vision_local()(local_images)    # [63, n_tokens, hidden_size]
+
+        # projector
+        global_features = self.get_model().mm_projector(image_global)
+        local_features = self.get_model().mm_projector(image_local)
+        # down
+        bs_local, seq_len, hidden_size = local_features.shape
+        #### 针对 siglip2, 729 不能被 4 整除, 加入 padding 操作
+        if seq_len % 4 != 0:
+            pad_len = 4 - (seq_len % 4)
+            local_features = F.pad(local_features, (0, 0, 0, pad_len), "constant", 0)
+            seq_len += pad_len
+        #### 针对 siglip2, 729 不能被 4 整除, 加入 padding 操作
+        local_features = local_features.view(bs_local, int(seq_len // 4), int(hidden_size * 4))
+        local_features = self.get_model().down_vision(local_features)
+
+        # 重塑局部特征，计算累积索引
+        cumulative_indices = [0] + list(itertools.accumulate(index_list))
+        # images_return = []
+        # for i in range(batch_size):
+        #     start_idx, end_idx = cumulative_indices[i], cumulative_indices[i+1]
+        #     images_return.append([global_features[i], local_features[start_idx:end_idx]])
+        images_return = [
+            [global_features[i], local_features[cumulative_indices[i]:cumulative_indices[i+1]]]
+            for i in range(batch_size)
+        ]
+        return images_return
+    #--------------------------------------------------
+
+
+    def prepare_inputs_labels_for_multimodal(self, input_ids, attention_mask, past_key_values, labels, images, image_sizes):
         vision_global = self.get_model().get_vision_global()
         if vision_global is None or images is None or input_ids.shape[1] == 1:
             if past_key_values is not None and vision_global is not None and images is not None and input_ids.shape[1] == 1:
                 attention_mask = torch.ones((attention_mask.shape[0], past_key_values[-1][-1].shape[-2] + 1), dtype=attention_mask.dtype, device=attention_mask.device)
             return input_ids, attention_mask, past_key_values, None, labels
 
-
-        for idx, img_input in enumerate(images[0]):
-            # if img_input.dim() == 3:
-            #     img_input = img_input.unsqueeze(0)
-            images[0][idx] = self.encode_images(img_input)
+        #--------------------------------------------------
+        images[0] = self.encode_images_batch(images[0])
+        #--------------------------------------------------
 
         image_features, image_indexes = images[0], images[1]
+        if self.config.image_aspect_ratio == "anyres":
+            for image_idx, image_feature in enumerate(image_features):
+                num_patch_width, num_patch_height = get_anyres_image_grid_shape(
+                    image_sizes[image_idx], self.get_model().get_vision_global().image_size, self.config.image_grid_pinpoints
+                )
+                num_patches_per_side = self.get_model().get_vision_global().num_patches_per_side
+                down = 4 // 2 # TODO Fix
+                num_patches_per_side = num_patches_per_side // down
+                #### 针对 siglip2 的特殊处理
+                while num_patches_per_side * num_patches_per_side < image_feature[1].shape[1]:
+                    num_patches_per_side += 1  # 增加 num_patches_per_side, 直到面积 >= 183
+                target_seq_len = num_patches_per_side * num_patches_per_side
+                pad_len = target_seq_len - image_feature[1].shape[1]  # 需要填充的长度
+                if pad_len > 0:
+                    image_feature[1] = F.pad(image_feature[1], (0, 0, 0, pad_len), "constant", 0)
+                image_feature[1] = image_feature[1].view(num_patch_width, num_patch_height, num_patches_per_side, num_patches_per_side, -1)
+                #### 针对 siglip2 的特殊处理
+                # image_feature[1] = image_feature[1].view(num_patch_width, num_patch_height, num_patches_per_side, num_patches_per_side, -1)
+                image_feature[1] = image_feature[1].permute(4, 0, 2, 1, 3).contiguous()
+                image_feature[1] = image_feature[1].flatten(1, 2).flatten(2, 3)
+                image_feature[1] = unpad_image(image_feature[1], image_sizes[image_idx], num_patch_width, num_patch_height)
+                image_feature[1] = [patch.permute(1, 2, 0).reshape(-1, patch.shape[0]) for patch in image_feature[1]]
+        elif self.config.image_aspect_ratio == "grid":
+            for image_idx, image_feature in enumerate(image_features):
+                image_feature[1] = list(torch.unbind(image_feature[1], dim=0))
+
         new_input_embeds = []
         new_labels = [] if labels is not None else None
         cur_image_idx = 0
@@ -96,59 +142,52 @@ class LlavaMetaForCausalLM(ABC):
                 cur_image_indexes = image_indexes[cur_image_idx]
                 image_token_start = image_token_indices[0]
                 if getattr(self.config, 'tune_mm_mlp_adapter', False) and getattr(self.config, 'mm_use_im_start_end', False):
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[:image_token_start-1]).detach())
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[image_token_start-1:image_token_start]))
+                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[:image_token_start-1]).detach())  # before <image>
+                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[image_token_start-1:image_token_start]))  # <image>
                     # global
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[0].unsqueeze(0)))
-                    cur_new_input_embeds.append(cur_image_features[0])
+                    if self.config.use_pos_token:
+                        cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[0].unsqueeze(0)))  # global pos token
+                    cur_new_input_embeds.append(cur_image_features[0])  # global feature
                     # local ####################################################################
-                    # if len(cur_image_features) != 1:
-                    #     for idx in range(cur_image_features[1].size()[0]):
-                    #         cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[idx+1].unsqueeze(0)))
-                    #         cur_new_input_embeds.append(cur_image_features[1][idx])
-                    for idx in range(cur_image_features[1].size()[0]):
-                        cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[idx+1].unsqueeze(0)))
-                        cur_new_input_embeds.append(cur_image_features[1][idx])
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[image_token_start+1:image_token_start+2]))
+                    for idx in range(len(cur_image_features[1])):
+                        if self.config.use_pos_token:
+                            cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[idx+1].unsqueeze(0)))  # local pos token
+                        cur_new_input_embeds.append(cur_image_features[1][idx])  # local feature
+                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[image_token_start+1:image_token_start+2]))  # </image>
                     if labels is not None:
                         cur_new_labels.append(cur_labels[:image_token_start])
                         # global
-                        image_label = cur_image_features[0].shape[0]
-                        image_label = image_label + 1
-                        # local
-                        # if len(cur_image_features) != 1:
-                        #     image_label = image_label + cur_image_features[1].shape[0] * cur_image_features[1].shape[1]
-                        #     image_label = image_label + cur_image_features[1].shape[0]
-                        image_label = image_label + cur_image_features[1].shape[0] * cur_image_features[1].shape[1]
-                        image_label = image_label + cur_image_features[1].shape[0]
+                        image_label = cur_image_features[0].shape[0]  # global image label
+                        if self.config.use_pos_token:
+                            image_label = image_label + 1  # global pos label
+                        # local ####################################################################
+                        image_label = image_label + sum(patch.shape[0] for patch in cur_image_features[1])  # local image label
+                        if self.config.use_pos_token:
+                            image_label = image_label + len(cur_image_features[1])  # local pos label
                         cur_new_labels.append(torch.full((image_label,), IGNORE_INDEX, device=labels.device, dtype=labels.dtype))
                         cur_new_labels.append(cur_labels[image_token_start+1:image_token_start+2]) # +1, +2? ## 以前是+0， +1
                         cur_labels = cur_labels[image_token_start+2:]
                 else:
                     cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[:image_token_start]))
                     # global
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[0].unsqueeze(0)))  ###########################
+                    if self.config.use_pos_token:
+                        cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[0].unsqueeze(0)))  ###########################
                     cur_new_input_embeds.append(cur_image_features[0])  ###########################
                     # local ####################################################################
-                    # if len(cur_image_features) != 1:
-                    #     for idx in range(cur_image_features[1].size()[0]):
-                    #         cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[idx+1].unsqueeze(0)))  ###########################
-                    #         cur_new_input_embeds.append(cur_image_features[1][idx])  ###########################
-                    for idx in range(cur_image_features[1].size()[0]):
-                        cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[idx+1].unsqueeze(0)))  ###########################
+                    for idx in range(len(cur_image_features[1])):
+                        if self.config.use_pos_token:
+                            cur_new_input_embeds.append(self.get_model().embed_tokens(cur_image_indexes[idx+1].unsqueeze(0)))  ###########################
                         cur_new_input_embeds.append(cur_image_features[1][idx])  ###########################
                     # cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[image_token_start+1:image_token_start+2]))
                     if labels is not None:
                         cur_new_labels.append(cur_labels[:image_token_start])
                         # global
                         image_label = cur_image_features[0].shape[0]  ###########################
-                        image_label = image_label + 1  ###########################
-                        # # local
-                        # if len(cur_image_features) != 1:
-                        #     image_label = image_label + cur_image_features[1].shape[0] * cur_image_features[1].shape[1]  ###########################
-                        #     image_label = image_label + cur_image_features[1].shape[0]  ###########################
-                        image_label = image_label + cur_image_features[1].shape[0] * cur_image_features[1].shape[1]  ###########################
-                        image_label = image_label + cur_image_features[1].shape[0]  ###########################
+                        if self.config.use_pos_token:
+                            image_label = image_label + 1  ###########################
+                        image_label = image_label + sum(patch.shape[0] for patch in cur_image_features[1])  ###########################
+                        if self.config.use_pos_token:
+                            image_label = image_label + len(cur_image_features[1])  ###########################
                         cur_new_labels.append(torch.full((image_label,), IGNORE_INDEX, device=labels.device, dtype=labels.dtype)) ###########################
                         cur_labels = cur_labels[image_token_start+1:]
                 cur_image_idx += 1
@@ -215,9 +254,10 @@ class LlavaMetaForCausalLM(ABC):
     def initialize_vision_tokenizer(self, model_args, tokenizer):
         if model_args.mm_use_im_start_end:
             num_new_tokens = tokenizer.add_tokens([DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, DEFAULT_IM_GLOBAL_TOKEN,
-                                                   DEFAULT_IM_1_1_TOKEN, DEFAULT_IM_1_2_TOKEN, DEFAULT_IM_1_3_TOKEN,
-                                                   DEFAULT_IM_2_1_TOKEN, DEFAULT_IM_2_2_TOKEN, DEFAULT_IM_2_3_TOKEN,
-                                                   DEFAULT_IM_3_1_TOKEN, DEFAULT_IM_3_2_TOKEN, DEFAULT_IM_3_3_TOKEN], special_tokens=True)
+                                                   DEFAULT_IM_1_1_TOKEN, DEFAULT_IM_1_2_TOKEN, DEFAULT_IM_1_3_TOKEN, DEFAULT_IM_1_4_TOKEN,
+                                                   DEFAULT_IM_2_1_TOKEN, DEFAULT_IM_2_2_TOKEN, DEFAULT_IM_2_3_TOKEN, DEFAULT_IM_2_4_TOKEN,
+                                                   DEFAULT_IM_3_1_TOKEN, DEFAULT_IM_3_2_TOKEN, DEFAULT_IM_3_3_TOKEN, DEFAULT_IM_3_4_TOKEN,
+                                                   DEFAULT_IM_4_1_TOKEN, DEFAULT_IM_4_2_TOKEN, DEFAULT_IM_4_3_TOKEN, DEFAULT_IM_4_4_TOKEN], special_tokens=True)
             self.resize_token_embeddings(len(tokenizer))  # modify the embeded matrix
 
             if num_new_tokens > 0:  # initialize the new tokens

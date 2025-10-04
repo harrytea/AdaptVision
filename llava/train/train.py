@@ -23,7 +23,9 @@ def train():
     _, _, args = parser.parse_args_into_dataclasses()
     local_rank = args.local_rank  # 获取当前rank
 
+    print("============================Initialize model...================================")
     model = LlavaLlamaForCausalLM.from_pretrained(args.model_name_or_path)
+    print("============================Loaded model...================================")
     model.config.use_cache = False
 
     # gradient checkpointing
@@ -31,27 +33,6 @@ def train():
         def make_inputs_require_grad(module, input, output):
             output.requires_grad_(True)
         model.get_input_embeddings().register_forward_hook(make_inputs_require_grad)
-
-
-    # LoRA
-    if args.lora_enable:
-        from peft import LoraConfig, get_peft_model
-        lora_config = LoraConfig(
-            r=args.lora_r,
-            lora_alpha=args.lora_alpha,
-            target_modules=find_all_linear_names(model),
-            lora_dropout=args.lora_dropout,
-            bias=args.lora_bias,
-            task_type="CAUSAL_LM",
-        )
-        if args.bits == 16:
-            if args.bf16:
-                model.to(torch.bfloat16)
-            if args.fp16:
-                model.to(torch.float16)
-        rank0_print("Adding LoRA adapters...")
-        model = get_peft_model(model, lora_config)
-
 
     # tokenizer
     tokenizer = transformers.AutoTokenizer.from_pretrained(

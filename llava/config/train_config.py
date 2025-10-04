@@ -24,6 +24,17 @@ class TrainingArguments(transformers.TrainingArguments):
     data_path: str = field(default=None, metadata={"help": "Path to the training data."})
     data_stage: str = field(default=None, metadata={"help": "Pretrain or finetune."})
     image_folder: Optional[str] = field(default=None)
+    use_pos_token: bool = field(default=True)
+
+    # --------  image process  --------
+    image_aspect_ratio: Optional[str] = field(default="grid") # grid, anyres 
+
+    # --------  grid  --------
+    max_grid_num: Optional[int] = field(default=3)  # grid, 3 
+
+    # --------  anyres  --------
+    image_grid_pinpoints: Optional[str] = field(default="(1x1),...,(3x3)")  # anyres, (1x1),...,(3x3)
+
     # training arguments
     optim: str = field(default="adamw_torch")
     remove_unused_columns: bool = field(default=False)
@@ -33,9 +44,3 @@ class TrainingArguments(transformers.TrainingArguments):
     dataloader_drop_last: bool = field(default=True)
     dataloader_num_workers: int = field(default=2, metadata={"help": "."},)
     bits: int = field(default=16, metadata={"help": "How many bits to use."})
-    # lora params
-    lora_enable: bool = False
-    lora_r: int = 64
-    lora_alpha: int = 16
-    lora_dropout: float = 0.05
-    lora_bias: str = "none"

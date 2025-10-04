@@ -8,7 +8,7 @@ import transformers
 from llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
 from llava.config.data_config import PROMPT_DATA_PRE, PROMPT_DATA_TUNE
 from llava import conversation as conversation_lib
-from llava.mm_utils import tokenizer_image_token, sliding_window, expand2square
+from llava.mm_utils import tokenizer_image_token, sliding_window, process_grid_image, process_anyres_image
 from torch.utils.data import Dataset
 from PIL import Image
 
@@ -19,7 +19,7 @@ def rank0_print(*args):
         print(*args)
 
 
-# xxx <image>\n --> <im_start><image><im_end>\n xxx
+# xxx <image>\n --> <img><image></img>\n xxx
 def preprocess_multimodal(sources, data_args):
     for source in sources:
         for sentence in source:
@@ -77,8 +77,6 @@ def preprocess_v1(sources, tokenizer):
 
 
 class LazySupervisedDataset(Dataset):
-    """Dataset for supervised fine-tuning."""
-
     def __init__(self, data_path, tokenizer, data_args):
         super(LazySupervisedDataset, self).__init__()
         list_data_dict = []
@@ -112,15 +110,23 @@ class LazySupervisedDataset(Dataset):
         processor = self.data_args.image_processor
         image = Image.open(osp.join(image_folder, data_folder, image_file)).convert('RGB')
 
+        # --------------------------------------------------------------------------------
+        # image = image.resize((1000, 1500), Image.Resampling.LANCZOS)  # TODO test, remove for training
+        # --------------------------------------------------------------------------------
+
         # resize the image to square
         crop_height = processor.crop_size['height']  
-        image = expand2square(image, crop_height)
-        windows_img, windows_index = sliding_window(image, stride=crop_height)
+        if self.data_args.image_aspect_ratio == "grid":
+            images = process_grid_image(pil_img=image, shard_size=crop_height, max_grid_num=self.data_args.max_grid_num)
+        elif self.data_args.image_aspect_ratio == "anyres":
+            images = process_anyres_image(pil_img=image, shard_size=crop_height, grid_pinpoints=self.data_args.image_grid_pinpoints)
+
+        windows_img, windows_index = sliding_window(images, stride=crop_height)
         image_concat = []
         for img in windows_img:
             img = processor.preprocess(img, return_tensors='pt')['pixel_values'][0]
             image_concat.append(img)
-        image = torch.stack(image_concat, dim=0)
+        images = torch.stack(image_concat, dim=0)
 
 
         # process conversation
@@ -133,7 +139,8 @@ class LazySupervisedDataset(Dataset):
             joined_str = f"<{win_index[0]},{win_index[1]}>"
             tensor_index = self.tokenizer.encode(joined_str)[1]
             windows_index[idx] = torch.tensor(tensor_index, dtype=torch.long)
-        data_dict['image'] = image
+        data_dict['image'] = images
+        data_dict['image_sizes'] = image.size
         data_dict['image_index'] = windows_index
 
         return data_dict
@@ -155,8 +162,10 @@ class DataCollatorForSupervisedDataset(object):
         batch = {"input_ids": input_ids, "labels": labels, "attention_mask": input_ids.ne(pad_token_id),}
 
         images = [instance['image'] for instance in instances]
+        image_sizes = [instance['image_sizes'] for instance in instances]
         image_index = [instance['image_index'] for instance in instances]
         batch['images'] = (images, image_index)
+        batch['image_sizes'] = image_sizes
         return batch
 
 
