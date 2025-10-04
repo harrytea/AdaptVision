@@ -1,0 +1,72 @@
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "Python: Current File",
+//             "type": "python",
+//             "request": "launch",
+//             "program": "${file}",
+//             "console": "integratedTerminal",
+//             "justMyCode": true
+//         }
+//     ]
+// }
+
+
+
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "/opt/conda/envs/llava/bin/deepspeed",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--include", "localhost:1",
+                "llava/train/train_mem.py",
+                "--deepspeed", "./scripts/zero2.json",
+                "--model_name_or_path", "/opt/vicuna-7b-v1.5",
+                "--data_path", "/opt/MultimodalOCR/MultimodalOCR/model/AdaptVision/assets/instruct",
+                "--image_folder", "/opt/MultimodalOCR/MultimodalOCR/model/AdaptVision/assets/images",
+                "--data_stage", "pretrain",
+                // "--data_stage", "finetune",
+                "--vision_tower", "/opt/MultimodalOCR/MultimodalOCR/model/AdaptVision/google/siglip2-so400m-patch16-512",
+                "--tune_mm_mlp_adapter", "True",
+                "--mm_vision_select_layer", "-2",
+                "--mm_use_im_start_end",
+                "--use_pos_token", "False",
+                "--image_aspect_ratio", "anyres",
+                "--max_grid_num", "3",
+                "--image_grid_pinpoints", "(1x1),...,(3x3)",
+                "--bf16", "True",
+                "--output_dir", "./checkpoints/llava-7b-pretrain",
+                "--num_train_epochs", "1",
+                "--dataloader_num_workers", "0",
+                "--per_device_train_batch_size", "2",
+                "--per_device_eval_batch_size", "4",
+                "--gradient_accumulation_steps", "2",
+                "--save_strategy", "steps",
+                "--save_steps", "20000",
+                "--save_total_limit", "1",
+                "--learning_rate", "2e-3",
+                "--weight_decay", "0.",
+                "--warmup_ratio", "0.03",
+                "--lr_scheduler_type", "cosine",
+                "--logging_steps", "1",
+                "--tf32", "True",
+                "--model_max_length", "4096",
+                "--gradient_checkpointing", "True",
+                "--report_to", "none"
+            ]
+        }
+    ]
+}
