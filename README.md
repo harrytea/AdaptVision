@@ -2,7 +2,7 @@
 
 AdaptVision: Dynamic Input Scaling in MLLMs for Versatile Scene Understanding
 
-<a href="https://github.com/harrytea/AdaptVision"><img src="images/arch.png" width="100%"></a>
+<a href="https://github.com/harrytea/AdaptVision"><img src="assets/arch.png" width="100%"></a>
 
 ## Install 
 
@@ -45,7 +45,7 @@ link2: [grounding_finetune.zip](https://pan.baidu.com/s/1rtOYqcXGWGUEpVu4UVAsAA?
 Example
 
 <div style="text-align:center;">
-  <a><img src="images/example.jpg" width="40%"></a>
+  <a><img src="assets/example.jpg" width="40%"></a>
 </div>
 
 ```json
